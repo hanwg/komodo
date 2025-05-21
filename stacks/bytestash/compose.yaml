@@ -10,13 +10,6 @@ services:
     networks:
       - default
       - hanwg.top
-    environment:
-      - OIDC_ENABLED=true
-      - OIDC_DISPLAY_NAME=[[OIDC_DISPLAY_NAME]]
-      - OIDC_ISSUER_URL=[[OIDC_PROVIDER_FULL_URL]]
-      - OIDC_CLIENT_ID=bytestash
-      - OIDC_CLIENT_SECRET=[[BYTESTASH_OIDC_SECRET]]
-      - OIDC_SCOPES=openid
 
 volumes:
   data:
