@@ -12,14 +12,13 @@ services:
     volumes:
       - homebox-data:/data/
     #ports:
-    #  - 3100:7745
+    #  - 7745:7745
     networks:
       - default
       - hanwg.top
 
 volumes:
   homebox-data:
-    driver: local
 
 networks:
   default:
