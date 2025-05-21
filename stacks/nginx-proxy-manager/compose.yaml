@@ -13,7 +13,7 @@ services:
       - '8555:8555' # frigate webrtc stream
     volumes:
       - data:/data
-      - letsencrypt:/etc/letsencrypt
+      - /nas/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
       - /nas/nginx-proxy-manager3/logs:/data/logs
     networks:
       - default
