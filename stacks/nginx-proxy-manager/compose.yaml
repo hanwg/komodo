@@ -7,14 +7,12 @@ services:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
     ports:
       - '443:443' # Public HTTPS Port
-      # - '81:81'   # Admin Web Port
+      # - '81:81' # Admin Web Port
       - '80:80'   # Redirect to HTTPS
-      - '8554:8554' # frigate rtsp stream
-      - '8555:8555' # frigate webrtc stream
     volumes:
       - data:/data
       - /nas/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
-      - /nas/nginx-proxy-manager3/logs:/data/logs
+      - /nas/nginx-proxy-manager/logs:/data/logs
     networks:
       - default
       - hanwg.top
@@ -26,7 +24,7 @@ volumes:
   letsencrypt:
 
 networks:
-  default:
+  default: # required to be able to serve clients
   hanwg.top:
     name: hanwg.top
     internal: true
