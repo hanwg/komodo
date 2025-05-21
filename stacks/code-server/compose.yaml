@@ -9,6 +9,8 @@ services:
       #- HASHED_PASSWORD= #optional
       #- SUDO_PASSWORD= #optional
       #- SUDO_PASSWORD_HASH= #optional
+    env_file:
+      - .env
     volumes:
       - config:/config
       - root:/root
