@@ -1,0 +1,30 @@
+services:
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: always
+    labels:
+      komodo.skip: # Prevent Komodo from stopping with StopAllContainers
+    ports:
+      - '443:443' # Public HTTPS Port
+      # - '81:81' # Admin Web Port
+      - '80:80'   # Redirect to HTTPS
+    volumes:
+      - data:/data
+      - /nas/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+      - /nas/nginx-proxy-manager2/logs:/data/logs
+    networks:
+      - default
+      - hanwg.top
+    environment:
+      - TZ=Asia/Singapore
+
+volumes:
+  data:
+  letsencrypt:
+
+networks:
+  default: # required to be able to serve clients
+  hanwg.top:
+    name: hanwg.top
+    internal: true
