@@ -5,8 +5,16 @@ services:
     restart: unless-stopped
     volumes:
       - data:/data/
-    ports:
-      - 80:80
+    #ports:
+    #  - 80:80
+    networks:
+      - default
+      - hanwg.top
 
 volumes:
   data:
+
+networks:
+  default:
+  hanwg.top:
+    external: true

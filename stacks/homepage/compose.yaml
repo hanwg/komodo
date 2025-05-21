@@ -10,3 +10,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=homepage.hanwg.top
+    # added
+    networks:
+      - default
+      - hanwg.top
+
+# added
+networks:
+  default:
+  hanwg.top:
+    external: true

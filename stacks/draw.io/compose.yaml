@@ -3,5 +3,12 @@ services:
     image: jgraph/drawio
     container_name: drawio
     restart: unless-stopped
-    ports:
-      - 8080:8080
+    networks:
+      - default
+      - hanwg.top
+
+networks:
+  default:
+    internal: true
+  hanwg.top:
+    external: true
