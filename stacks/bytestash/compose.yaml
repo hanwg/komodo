@@ -1,6 +1,6 @@
 services:
   bytestash:
-    image: "ghcr.io/jordan-dalby/bytestash:latest"
+    image: ghcr.io/jordan-dalby/bytestash:latest
     container_name: bytestash
     volumes:
       - data:/data/snippets
@@ -8,11 +8,14 @@ services:
       - 5000:5000
     restart: unless-stopped
     networks:
+      - default
       - hanwg.top
 
 volumes:
   data:
 
 networks:
+  default:
+    internal: true
   hanwg.top:
     external: true
