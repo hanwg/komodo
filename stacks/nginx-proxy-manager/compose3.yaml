@@ -1,4 +1,5 @@
-services:
+  name: nginx-proxy-manager
+  services:
   nginx-proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager
@@ -7,7 +8,7 @@ services:
       komodo.skip: # Prevent Komodo from stopping with StopAllContainers
     ports:
       - '443:443'   # Public HTTPS Port
-      - '81:81'     # Admin Web Port
+      #- '81:81'     # Admin Web Port
       - '80:80'     # Redirect to HTTPS
       - '8554:8554' # frigate rtsp stream
       - '8555:8555' # frigate webrtc stream
