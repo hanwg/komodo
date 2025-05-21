@@ -12,7 +12,7 @@ services:
       - '80:80'   # Redirect to HTTPS
     volumes:
       - data:/data
-      - /nas/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+      - letsencrypt:/etc/letsencrypt
       - /nas/nginx-proxy-manager2/logs:/data/logs
     networks:
       - default
