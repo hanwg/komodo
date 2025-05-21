@@ -1,0 +1,39 @@
+services:
+  frigate:
+    image: ghcr.io/blakeblackshear/frigate:stable
+    container_name: frigate
+    privileged: true
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Singapore
+    volumes:
+      - config:/config
+      - /nas/frigate:/media/frigate
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "5000:5000"
+      - "8554:8554"     # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
+
+    # Example for 1280x720
+    # $ python -c 'print("{:.2f}MB".format((1280 * 720 * 1.5 * 9 + 270480) / 1048576))'
+    # 12.12MB
+    shm_size: 150mb
+
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    networks:
+      - hanwg.top
+      - default
+
+volumes:
+  config:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
