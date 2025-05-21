@@ -15,6 +15,6 @@ volumes:
   data:
 
 networks:
-  default:
+  default: # required to check password breaches
   hanwg.top:
     external: true
