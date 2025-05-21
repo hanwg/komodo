@@ -7,12 +7,6 @@ services:
     ports:
       - 5000:5000
     restart: unless-stopped
-    networks:
-      - hanwg.top
 
 volumes:
   data:
-
-networks:
-  hanwg.top:
-    external: true

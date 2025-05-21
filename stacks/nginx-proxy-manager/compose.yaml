@@ -15,18 +15,9 @@ services:
       - data:/data
       - /nas/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
       - /nas/nginx-proxy-manager3/logs:/data/logs
-    networks:
-      - default
-      - hanwg.top
     environment:
       - TZ=Asia/Singapore
 
 volumes:
   data:
   letsencrypt:
-
-networks:
-  default:
-  hanwg.top:
-    name: hanwg.top
-    internal: true
