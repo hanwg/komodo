@@ -34,7 +34,6 @@ volumes:
   config:
 
 networks:
-  default:
-    internal: true
+  default: # required for streams
   hanwg.top:
     external: true
