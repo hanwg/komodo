@@ -1,0 +1,31 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Asia/Singapore
+      #- HASHED_PASSWORD= #optional
+      #- SUDO_PASSWORD= #optional
+      #- SUDO_PASSWORD_HASH= #optional
+    volumes:
+      - config:/config
+      - root:/root
+      - /nas/homepage/_data:/host/docker-volumes/homepage
+      - /nas/code-server:/nas/code-server
+    networks:
+      - default
+      - hanwg.top
+    #ports:
+    #  - 8443:8443
+    restart: unless-stopped
+
+volumes:
+  config:
+  root:
+
+networks:
+  default: # needs to install extensions
+  hanwg.top:
+    external: true
