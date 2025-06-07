@@ -26,6 +26,8 @@ services:
       interval: 5s
       timeout: 10s
       retries: 16
+    env_file:
+      - .env
 
 networks:
   default: # required for downloading tools
