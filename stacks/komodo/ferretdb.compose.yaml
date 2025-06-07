@@ -35,7 +35,6 @@ services:
 #      TARGET_DB_NAME: ${KOMODO_DATABASE_DB_NAME:-komodo}
 #    networks:
 #      - default
-#    env_file: .env
 
   postgres2:
     # Recommended: Pin to a specific version
@@ -54,7 +53,6 @@ services:
       POSTGRES_DB: postgres # Do not change
     networks:
       - default
-    env_file: .env
 
   ferretdb2:
     # Recommended: Pin to a specific version
@@ -73,7 +71,6 @@ services:
       FERRETDB_POSTGRESQL_URL: postgres://${KOMODO_DB_USERNAME}:${KOMODO_DB_PASSWORD}@postgres2:5432/postgres
     networks:
       - default
-    env_file: .env
 
   core:
     image: ghcr.io/moghtech/komodo-core:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
@@ -86,7 +83,7 @@ services:
       driver: ${COMPOSE_LOGGING_DRIVER:-local}
     ports:
       - 9120:9120
-    env_file: .env
+    env_file: ./compose.env
 
     environment:
       KOMODO_DATABASE_ADDRESS: ferretdb2:27017
@@ -124,7 +121,7 @@ services:
     restart: unless-stopped
     logging:
       driver: ${COMPOSE_LOGGING_DRIVER:-local}
-    env_file: .env
+    env_file: ./compose.env
     volumes:
       ## Mount external docker socket
       - /var/run/docker.sock:/var/run/docker.sock
