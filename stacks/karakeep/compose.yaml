@@ -49,3 +49,8 @@ services:
 volumes:
   meilisearch:
   data:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
