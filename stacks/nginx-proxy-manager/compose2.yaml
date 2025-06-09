@@ -10,6 +10,7 @@ services:
       - '443:443' # Public HTTPS Port
       #- '81:81'   # Admin Web Port
       - '80:80'   # Redirect to HTTPS
+      - '2222:2222' # forgejo git ssh
     volumes:
       - data:/data
       - letsencrypt:/etc/letsencrypt
