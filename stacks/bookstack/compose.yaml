@@ -1,0 +1,40 @@
+services:
+  bookstack:
+    image: lscr.io/linuxserver/bookstack
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+    env_file:
+      - .env
+    networks:
+      - default
+      - hanwg.top
+    volumes:
+      - app_data:/config
+    #ports:
+    #  - 6875:80
+    restart: unless-stopped
+    depends_on:
+      - bookstack_db
+  bookstack_db:
+    image: lscr.io/linuxserver/mariadb
+    container_name: bookstack_db
+    environment:
+      - PUID=1000
+      - PGID=1000
+    env_file:
+      - .env
+    volumes:
+      - db_data:/config
+    restart: unless-stopped
+    networks:
+      - default
+volumes:
+  app_data:
+  db_data:
+networks:
+  default:
+    internal: true
+  hanwg.top:
+    external: true
