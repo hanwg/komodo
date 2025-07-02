@@ -1,0 +1,64 @@
+services:
+  shlink:
+    image: shlinkio/shlink:stable
+    container_name: shlink
+    restart: unless-stopped
+    depends_on:
+      - shlink-db
+    links:
+      - shlink-db
+    #ports:
+    #  - 8080:8080
+    env_file:
+      - .env
+    environment:
+      DEFAULT_DOMAIN: shlink.hanwg.top
+      DB_DRIVER: postgres
+      DB_HOST: shlink-db
+      DB_USER: shlink
+    networks:
+      - default
+      - hanwg.top
+
+  shlink-db:
+    container_name: shlink-db
+    user: 1000:1000
+    image: postgres:16-alpine
+    restart: unless-stopped
+    #ports:
+    #    - "5434:5432"
+    volumes:
+      - www:/home/shlink/www
+      - data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: shlink
+      POSTGRES_DB: shlink
+      PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      - default
+
+  shlink-web-client:
+    image: shlinkio/shlink-web-client
+    container_name: shlink-web-client
+    restart: unless-stopped
+    volumes:
+      - servers:/usr/share/nginx/html/
+    depends_on:
+      - shlink
+    #ports:
+    #  - 8334:8080
+    networks:
+      - default
+      - hanwg.top
+
+volumes:
+  www:
+  data:
+  servers:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
