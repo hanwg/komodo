@@ -1,0 +1,45 @@
+services:
+  broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless-ngx
+    restart: unless-stopped
+    depends_on:
+      - broker
+    volumes:
+      - data:/usr/src/paperless/data
+      - media:/usr/src/paperless/media
+      - export:/usr/src/paperless/export
+      - /nas/paperless-ngx:/usr/src/paperless/consume
+    env_file:
+      - .env
+    environment:
+      USERMAP_UID: 1000
+      USERMAP_GID: 1000
+      PAPERLESS_URL: https://paperless-ngx.hanwg.top
+      PAPERLESS_TIME_ZONE: Asia/Singapore
+      PAPERLESS_FILENAME_DATE_ORDER: YMD
+      PAPERLESS_DATE_ORDER: DMY
+      PAPERLESS_CONSUMER_RECURSIVE: true
+      PAPERLESS_CONSUMER_POLLING: 5
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_APPS: "allauth.socialaccount.providers.openid_connect"
+    networks:
+      - default
+      - hanwg.top
+
+volumes:
+  data:
+  media:
+  export:
+  redisdata:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
