@@ -1,0 +1,21 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    volumes:
+      - data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - default
+      - hanwg.top
+    #ports:
+    #  - 3001:3001
+    restart: always
+
+volumes:
+  data:
+
+networks:
+  default: # required for notifications
+  hanwg.top:
+    external: true
