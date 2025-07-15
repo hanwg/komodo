@@ -1,0 +1,29 @@
+services:
+  healthchecks:
+    image: healthchecks/healthchecks:latest
+    container_name: healthchecks
+    env_file:
+      - .env
+    environment:
+      - ALLOWED_HOSTS=healthchecks.hanwg.top,healthchecks
+      - DB=sqlite
+      - DB_NAME=/data/hc.sqlite
+      - DEBUG=False
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_PORT=587
+      - EMAIL_USE_TLS=True
+      - SITE_ROOT=https://healthchecks.hanwg.top
+    #ports:
+    #  - 18000:8000
+    volumes:
+      - healthchecks-data:/data
+    restart: unless-stopped
+    networks:
+      - default
+      - hanwg.top
+volumes:
+  healthchecks-data:
+networks:
+  default:
+  hanwg.top:
+    external: true
