@@ -1,0 +1,53 @@
+services:
+  keycloak_web:
+    restart: always
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    env_file:
+      - .env
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloakdb:5432/keycloak
+
+      KC_HOSTNAME: https://keycloak.hanwg.top
+      KC_HOSTNAME_ADMIN: https://keycloak-admin.hanwg.top
+      KC_PROXY_HEADERS: xforwarded
+
+      KC_LOG_LEVEL: info
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+
+      KC_HTTPS_PORT: 443
+      KC_HTTPS_CERTIFICATE_FILE: /ssl/fullchain.pem
+      KC_HTTPS_CERTIFICATE_KEY_FILE: /ssl/privkey.pem
+    command: start-dev
+    volumes:
+      - ssl:/ssl
+    depends_on:
+      - keycloakdb
+    #ports:
+    #  - 8080:8080
+    #  - 8443:443
+    networks:
+      - default
+      - hanwg.top
+
+  keycloakdb:
+    restart: always
+    image: public.ecr.aws/docker/library/postgres:16
+    container_name: keycloak_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    networks:
+      - default
+
+volumes:
+  postgres_data:
+  ssl:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
