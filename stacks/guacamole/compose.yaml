@@ -1,0 +1,47 @@
+services:
+  guacd:
+    image: guacamole/guacd
+    networks:
+      - default
+    restart: always
+    #ports:
+    #  - '4822:4822'
+  guacdb:
+    image: mariadb:10.9.5
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - MYSQL_DATABASE=guacamole
+      - MYSQL_USER=guacamole
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - default
+  guacamole:
+    image: guacamole/guacamole
+    networks:
+      - default
+      - hanwg.top
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - GUACD_HOSTNAME=guacd
+      - MYSQL_HOSTNAME=guacdb
+      - MYSQL_DATABASE=guacamole
+      - MYSQL_USER=guacamole
+      - TOTP_ENABLED=true
+    #ports:
+    #  - '8080:8080'
+    depends_on:
+      - guacdb
+      - guacd
+
+volumes:
+  data:
+
+networks:
+  default:
+  hanwg.top:
+    external: true
