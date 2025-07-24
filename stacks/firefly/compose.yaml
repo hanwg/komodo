@@ -57,6 +57,5 @@ volumes:
 
 networks:
   default:
-    internal: true
   hanwg.top:
     external: true
