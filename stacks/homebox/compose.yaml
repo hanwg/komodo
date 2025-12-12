@@ -16,6 +16,8 @@ services:
     networks:
       - default
       - hanwg.top
+    env_file:
+      - .env
 
 volumes:
   homebox-data:
