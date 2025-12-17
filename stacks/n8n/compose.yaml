@@ -10,6 +10,7 @@ services:
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
       - NODE_ENV=production
+      - N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false
       - WEBHOOK_URL=https://n8n.hanwg.top/
       - GENERIC_TIMEZONE=Asia/Singapore
     volumes:
