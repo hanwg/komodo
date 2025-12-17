@@ -10,13 +10,12 @@ services:
       - N8N_PORT=5678
       - N8N_PROTOCOL=https
       - NODE_ENV=production
-      - N8N_BLOCK_FILE_ACCESS_TO_N8N_FILES=false
       - WEBHOOK_URL=https://n8n.hanwg.top/
       - GENERIC_TIMEZONE=Asia/Singapore
     volumes:
       - n8n_data:/home/node/.n8n
-      - /homes:/homes
-      - /nas:/nas
+      - /homes:/home/node/.n8n-files/homes
+      - /nas:/home/node/.n8n-files/nas
     networks:
       - default
       - hanwg.top
