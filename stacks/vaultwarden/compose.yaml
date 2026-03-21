@@ -1,3 +1,5 @@
+# https://github.com/dani-garcia/vaultwarden
+
 services:
   vaultwarden:
     image: vaultwarden/server:latest
@@ -5,16 +7,8 @@ services:
     restart: unless-stopped
     volumes:
       - data:/data/
-    #ports:
-    #  - 80:80
-    networks:
-      - default
-      - hanwg.top
+    ports:
+      - 80:80
 
 volumes:
   data:
-
-networks:
-  default: # required to check password breaches
-  hanwg.top:
-    external: true
