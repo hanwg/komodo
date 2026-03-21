@@ -3,19 +3,10 @@ services:
     image: ghcr.io/c4illin/convertx
     container_name: convertx
     restart: unless-stopped
-    #ports:
-    #  - 3000:3000
+    ports:
+     - 3000:3000
     volumes:
       - data:/app/data
-    networks:
-      - default
-      - hanwg.top
 
 volumes:
   data:
-
-networks:
-  default:
-    internal: true
-  hanwg.top:
-    external: true
