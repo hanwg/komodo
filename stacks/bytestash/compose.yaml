@@ -7,17 +7,8 @@ services:
     # ports:
     #   - 5000:5000
     restart: unless-stopped
-    networks:
-      - default
-      - hanwg.top
     env_file:
       - .env
 
 volumes:
   data:
-
-networks:
-  default:
-    # internal: true # disabled so that we can connect to oidc provider
-  hanwg.top:
-    external: true
