@@ -16,18 +16,11 @@ services:
       - root:/root
       - /nas/homepage/_data:/host/docker-volumes/homepage
       - /nas/code-server:/nas/code-server
-    networks:
-      - default
-      - hanwg.top
-    #ports:
-    #  - 8443:8443
+    ports:
+      - 8443:8443
     restart: unless-stopped
 
 volumes:
   config:
   root:
 
-networks:
-  default: # needs to install extensions
-  hanwg.top:
-    external: true
