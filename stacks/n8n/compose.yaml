@@ -14,8 +14,8 @@ services:
       - GENERIC_TIMEZONE=Asia/Singapore
     volumes:
       - n8n_data:/home/node/.n8n
-      - /homes:/homes
-      - /nas:/nas
+      - /homes:/home/node/.n8n-files/homes
+      - /nas:/home/node/.n8n-files/nas
     networks:
       - default
       - hanwg.top

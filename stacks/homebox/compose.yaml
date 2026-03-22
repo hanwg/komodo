@@ -9,6 +9,7 @@ services:
       - HBOX_LOG_FORMAT=text
       - HBOX_WEB_MAX_UPLOAD_SIZE=10
       - HBOX_OPTIONS_ALLOW_ANALYTICS=false
+      - HBOX_OPTIONS_TRUST_PROXY=true
     volumes:
       - homebox-data:/data/
     #ports:
@@ -16,6 +17,8 @@ services:
     networks:
       - default
       - hanwg.top
+    env_file:
+      - .env
 
 volumes:
   homebox-data:

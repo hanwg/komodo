@@ -15,7 +15,6 @@ services:
       - type: bind
         source: /nas/jellyfin
         target: /media
-        read_only: true
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     # environment:
