@@ -9,9 +9,12 @@ services:
       - PGID=1000
       - TZ=Asia/Singapore
     volumes:
-      - /path/to/yaak/config:/config
+      - config:/config
     ports:
       - 3000:3000
       - 3001:3001
     shm_size: "1gb"
     restart: unless-stopped
+
+volumes:
+  config:
