@@ -13,17 +13,10 @@ services:
       - EMAIL_PORT=587
       - EMAIL_USE_TLS=True
       - SITE_ROOT=https://healthchecks.hanwg.top
-    #ports:
-    #  - 18000:8000
+    ports:
+      - 8000:8000
     volumes:
       - healthchecks-data:/data
     restart: unless-stopped
-    networks:
-      - default
-      - hanwg.top
 volumes:
   healthchecks-data:
-networks:
-  default:
-  hanwg.top:
-    external: true
