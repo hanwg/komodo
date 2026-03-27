@@ -17,7 +17,6 @@ services:
       KC_METRICS_ENABLED: true
       KC_HEALTH_ENABLED: true
 
-      KC_HTTPS_PORT: 443
       KC_HTTPS_CERTIFICATE_FILE: /ssl/fullchain.pem
       KC_HTTPS_CERTIFICATE_KEY_FILE: /ssl/privkey.pem
     command: start-dev
@@ -25,12 +24,8 @@ services:
       - ssl:/ssl
     depends_on:
       - keycloakdb
-    #ports:
-    #  - 8080:8080
-    #  - 8443:443
-    networks:
-      - default
-      - hanwg.top
+    ports:
+      - 8443:8443
 
   keycloakdb:
     restart: always
@@ -46,8 +41,3 @@ services:
 volumes:
   postgres_data:
   ssl:
-
-networks:
-  default:
-  hanwg.top:
-    external: true
