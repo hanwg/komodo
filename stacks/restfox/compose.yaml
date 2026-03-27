@@ -4,6 +4,7 @@ services:
   Restfox:
     image: flawiddsouza/restfox:${RESTFOX_VERSION:-0.14.1}
     container_name: Restfox
+    restart: unless-stopped
     ports:
       - "${CUSTOM_PORT_ON_HOST:-4004}:4004"
     volumes:
