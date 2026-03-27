@@ -1,0 +1,19 @@
+# https://hub.docker.com/_/yourls/
+
+services:
+  yourls:
+    image: yourls
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8120:8080
+    environment:
+      YOURLS_SITE: https://yourls.hanwg.top
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: yourls
+    volumes:
+      - db:/var/lib/mysql
