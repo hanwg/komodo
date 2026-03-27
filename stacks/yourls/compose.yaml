@@ -7,7 +7,7 @@ services:
     depends_on:
       - mysql
     ports:
-      - 8120:8080
+      - 8130:8080
     environment:
       YOURLS_SITE: https://yourls.hanwg.top
   mysql:
