@@ -1,8 +1,6 @@
 services:
   guacd:
     image: guacamole/guacd
-    networks:
-      - default
     restart: always
     #ports:
     #  - '4822:4822'
@@ -16,13 +14,8 @@ services:
       - MYSQL_USER=guacamole
     volumes:
       - data:/var/lib/mysql
-    networks:
-      - default
   guacamole:
     image: guacamole/guacamole
-    networks:
-      - default
-      - hanwg.top
     restart: always
     env_file:
       - .env
@@ -32,16 +25,11 @@ services:
       - MYSQL_DATABASE=guacamole
       - MYSQL_USER=guacamole
       - TOTP_ENABLED=true
-    #ports:
-    #  - '8080:8080'
+    ports:
+      - '8110:8080'
     depends_on:
       - guacdb
       - guacd
 
 volumes:
   data:
-
-networks:
-  default:
-  hanwg.top:
-    external: true
