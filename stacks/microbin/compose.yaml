@@ -3,8 +3,8 @@ services:
     image: danielszabo99/microbin:latest
     container_name: microbin
     restart: unless-stopped
-    #ports:
-    #  - "${MICROBIN_PORT}:8080"
+    ports:
+      - "8100:8080"
     volumes:
       - data:/app/microbin_data
     env_file:
@@ -47,13 +47,5 @@ services:
       MICROBIN_ENCRYPTION_SERVER_SIDE: ${MICROBIN_ENCRYPTION_SERVER_SIDE}
       MICROBIN_MAX_FILE_SIZE_ENCRYPTED_MB: ${MICROBIN_MAX_FILE_SIZE_ENCRYPTED_MB}
       MICROBIN_MAX_FILE_SIZE_UNENCRYPTED_MB: ${MICROBIN_MAX_FILE_SIZE_UNENCRYPTED_MB}
-    networks:
-      - default
-      - hanwg.top
 volumes:
   data:
-networks:
-  default:
-    internal: true
-  hanwg.top:
-    external: true
