@@ -1,7 +1,6 @@
 services:
   homebox:
     image: ghcr.io/sysadminsmedia/homebox:latest
-    #   image: ghcr.io/sysadminsmedia/homebox:latest-rootless
     container_name: homebox
     restart: always
     environment:
@@ -12,19 +11,10 @@ services:
       - HBOX_OPTIONS_TRUST_PROXY=true
     volumes:
       - homebox-data:/data/
-    #ports:
-    #  - 7745:7745
-    networks:
-      - default
-      - hanwg.top
+    ports:
+      - 7745:7745
     env_file:
       - .env
 
 volumes:
   homebox-data:
-
-networks:
-  default:
-    internal: true
-  hanwg.top:
-    external: true
