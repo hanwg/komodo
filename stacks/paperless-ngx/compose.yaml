@@ -1,6 +1,6 @@
 services:
   broker:
-    image: docker.io/library/redis:7
+    image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
       - redisdata:/data
@@ -11,6 +11,8 @@ services:
     restart: unless-stopped
     depends_on:
       - broker
+    ports:
+      - "8000:8000"
     volumes:
       - data:/usr/src/paperless/data
       - media:/usr/src/paperless/media
