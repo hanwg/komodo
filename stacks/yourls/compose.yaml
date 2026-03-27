@@ -10,11 +10,15 @@ services:
       - 8130:8080
     environment:
       YOURLS_SITE: https://yourls.hanwg.top
+    env_file:
+      - .env
   mysql:
     image: mysql
     restart: always
     environment:
       MYSQL_DATABASE: yourls
+    env_file:
+      - .env
     volumes:
       - db:/var/lib/mysql
 
