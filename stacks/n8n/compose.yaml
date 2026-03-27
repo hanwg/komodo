@@ -3,8 +3,8 @@ services:
     image: docker.n8n.io/n8nio/n8n
     container_name: n8n
     restart: always
-    #ports:
-    #  - "127.0.0.1:5678:5678"
+    ports:
+      - "5678:5678"
     environment:
       - N8N_HOST=n8n.hanwg.top
       - N8N_PORT=5678
@@ -16,12 +16,5 @@ services:
       - n8n_data:/home/node/.n8n
       - /homes:/home/node/.n8n-files/homes
       - /nas:/home/node/.n8n-files/nas
-    networks:
-      - default
-      - hanwg.top
 volumes:
   n8n_data:
-networks:
-  default:
-  hanwg.top:
-    external: true
