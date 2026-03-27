@@ -1,0 +1,39 @@
+services:
+  docmost:
+    image: docmost/docmost:latest
+    depends_on:
+      - db
+      - redis
+    environment:
+      APP_URL: "https://docmost.hanwg.top"
+      REDIS_URL: "redis://redis:6379"
+    env_file:
+      - .env
+    ports:
+      - "3010:3000"
+    restart: unless-stopped
+    volumes:
+      - docmost:/app/data/storage
+
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: docmost
+      POSTGRES_USER: docmost
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/postgresql
+
+  redis:
+    image: redis:8
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+
+volumes:
+  docmost:
+  db_data:
+  redis_data:
