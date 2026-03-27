@@ -5,9 +5,6 @@ services:
     volumes:
       - data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - default
-      - hanwg.top
     ports:
       - 3001:3001
     restart: always
