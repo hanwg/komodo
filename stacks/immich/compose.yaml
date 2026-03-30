@@ -30,8 +30,6 @@ services:
     restart: unless-stopped
     volumes:
       - haproxy:/usr/local/etc/haproxy
-    networks:
-      - default
 
   immich-machine-learning:
     container_name: immich_machine_learning
