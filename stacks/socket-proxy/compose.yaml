@@ -2,6 +2,8 @@ services:
   socket-proxy:
     image: lscr.io/linuxserver/socket-proxy:latest
     container_name: socket-proxy
+    ports:
+      - 2375:2375
     environment:
       - ALLOW_START=0 #optional
       - ALLOW_STOP=0 #optional
