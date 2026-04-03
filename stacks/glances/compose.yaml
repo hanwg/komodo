@@ -5,9 +5,9 @@ services:
     restart: unless-stopped
     pid: host
     network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - "GLANCES_OPT=-w"
-    env_file:
-      - .env
     ports:
       - 61209:61209
