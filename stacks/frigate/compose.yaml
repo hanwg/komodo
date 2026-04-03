@@ -1,11 +1,15 @@
+# https://docs.frigate.video/frigate/installation/#docker
+
 services:
   frigate:
-    image: ghcr.io/blakeblackshear/frigate:stable
     container_name: frigate
-    privileged: true
+    privileged: true # this may not be necessary for all setups
     restart: unless-stopped
-    environment:
-      TZ: Asia/Singapore
+    stop_grace_period: 30s # allow enough time to shut down the various services
+    image: ghcr.io/blakeblackshear/frigate:stable
+    shm_size: "150mb" # update for your cameras based on calculation above
+    devices:
+      - /dev/dri/renderD128:/dev/dri/renderD128
     volumes:
       - config:/config
       - /nas/frigate:/media/frigate
@@ -13,27 +17,15 @@ services:
         target: /tmp/cache
         tmpfs:
           size: 1000000000
-    #ports:
-    #  - 8971:8971 # UI
-    #  - 5000:5000 # unauthenticated
-    #  - 8554:8554 # RTSP feeds
-    #  - 8555:8555 # WebRTC
-
-    # Example for 1280x720
-    # $ python -c 'print("{:.2f}MB".format((1280 * 720 * 1.5 * 9 + 270480) / 1048576))'
-    # 12.12MB
-    shm_size: 150mb
-
-    devices:
-      - /dev/dri/renderD128:/dev/dri/renderD128
-    networks:
-      - hanwg.top
-      - default
+    ports:
+      - "8971:8971" # UI
+      - "5000:5000" # Internal unauthenticated access. Expose carefully.
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
+      - "1984:1984" # go2rtc
+    environment:
+      TZ: Asia/Singapore
 
 volumes:
   config:
-
-networks:
-  default: # required for accessing camera streams
-  hanwg.top:
-    external: true

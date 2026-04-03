@@ -4,11 +4,8 @@ services:
     container_name: jellyfin
     user: 1000:1000
     # network_mode: 'host'
-    networks:
-      - default
-      - hanwg.top
-    #ports:
-    #  - 8096:8096
+    ports:
+      - 8096:8096
     volumes:
       - config:/config
       - cache:/cache
@@ -25,7 +22,3 @@ services:
 volumes:
   config:
   cache:
-networks:
-  default:
-  hanwg.top:
-    external: true
