@@ -2,6 +2,8 @@ services:
   vikunja:
     image: vikunja/vikunja:2.2.2
     environment:
+      PUID: 1000
+      PGID: 1000
       VIKUNJA_SERVICE_PUBLICURL: https://vijunka.hanwg.top/
       VIKUNJA_DATABASE_PATH: /db/vikunja.db
     env_file:
