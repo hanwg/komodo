@@ -2,7 +2,7 @@
 
 services:
   Restfox:
-    image: flawiddsouza/restfox:${RESTFOX_VERSION:-0.14.1}
+    image: flawiddsouza/restfox
     container_name: Restfox
     restart: unless-stopped
     ports:
