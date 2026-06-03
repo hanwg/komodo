@@ -5,6 +5,8 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
+    environment:
+      LOG_LEVEL: warn
     volumes:
       - data:/data/
     ports:
