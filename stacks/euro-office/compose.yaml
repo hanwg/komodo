@@ -1,8 +1,8 @@
 services:
   euro-office:
     image: ghcr.io/euro-office/documentserver
-    #environment:
-    #  JWT_ENABLED: true
+    environment:
+      JWT_ENABLED: false
     env_file:
       - .env
     ports:
