@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - "8080:80"
+      - "28080:80"
     volumes:
       - config:/etc/euro-office/documentserver
       - /nas/euro-office:/var/lib/euro-office/documentserver
