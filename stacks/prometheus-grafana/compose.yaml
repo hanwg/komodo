@@ -17,6 +17,8 @@ services:
     restart: unless-stopped
     expose:
       - 3100:3000
+    depends_on:
+      - prometheus
 
 volumes:
   prometheus_data:
