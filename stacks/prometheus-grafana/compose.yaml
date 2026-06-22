@@ -3,8 +3,9 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    #command:
-    #  - '--web.config.file=/prometheus/web.yml'
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.config.file=/etc/prometheus/web.yml'
     volumes:
       - prometheus_data:/prometheus
     restart: unless-stopped
@@ -23,5 +24,6 @@ services:
       - prometheus
 
 volumes:
+  prometheus_config:
   prometheus_data:
   grafana_data:
