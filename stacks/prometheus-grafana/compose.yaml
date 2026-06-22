@@ -4,7 +4,7 @@ services:
     image: prom/prometheus
     container_name: prometheus
     command:
-      - '--config.file=/prometheus/web.yml'
+      - '--web.config.file=/prometheus/web.yml'
     volumes:
       - prometheus_data:/prometheus
     restart: unless-stopped
