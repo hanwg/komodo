@@ -6,7 +6,7 @@ services:
     volumes:
       - prometheus_data:/prometheus
     restart: unless-stopped
-    expose:
+    ports:
       - 9190:9090
 
   grafana:
@@ -15,7 +15,7 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
     restart: unless-stopped
-    expose:
+    ports:
       - 3100:3000
     depends_on:
       - prometheus
