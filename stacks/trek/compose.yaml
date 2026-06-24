@@ -1,0 +1,47 @@
+# https://github.com/mauriceboe/TREK#docker-compose-production
+
+services:
+  app:
+    image: mauriceboe/trek:latest
+    container_name: trek
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
+    tmpfs:
+      - /tmp:noexec,nosuid,size=64m
+    ports:
+      - "3200:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-}   # generate with: openssl rand -hex 32
+      - TZ=Asia/Singapore
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-}
+      - APP_URL=https://trek.hanwg.top                 # required for OIDC + email links
+      - FORCE_HTTPS=true                   # behind a TLS-terminating proxy
+      - TRUST_PROXY=1
+      # - OIDC_ADMIN_CLAIM=groups
+      # - OIDC_ADMIN_VALUE=app-trek-admins
+    volumes:
+      - data:/app/data
+      - uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  data:
+  uploads:
